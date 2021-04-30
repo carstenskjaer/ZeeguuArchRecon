@@ -1,0 +1,116 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 800px;
+            height: 800px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "tools", "label": "tools", "shape": "dot", "size": 9.825759298200182, "title": "tools LOC: 2363"}, {"id": "zeeguu_api", "label": "zeeguu_api", "shape": "dot", "size": 15.389392789944509, "title": "zeeguu_api LOC: 3701"}, {"id": "zeeguu_api_test", "label": "zeeguu_api_test", "shape": "dot", "size": 5.405622974041573, "title": "zeeguu_api_test LOC: 1300"}, {"id": "zeeguu_core_test", "label": "zeeguu_core_test", "shape": "dot", "size": 10.753031546824237, "title": "zeeguu_core_test LOC: 2586"}, {"id": "zeeguu_core.model", "label": "zeeguu_core.model", "shape": "dot", "size": 24.815967622369314, "title": "zeeguu_core.model LOC: 5968"}, {"id": "zeeguu_core", "label": "zeeguu_core", "shape": "dot", "size": 17.406105976413865, "title": "zeeguu_core LOC: 4186"}]);
+        edges = new vis.DataSet([{"arrowStrikethrough": false, "arrows": "to", "from": "tools", "title": "112", "to": "zeeguu_core.model", "width": 4.718498871295094}, {"arrowStrikethrough": false, "arrows": "to", "from": "tools", "title": "176", "to": "zeeguu_core", "width": 5.170483995038151}, {"arrowStrikethrough": false, "arrows": "to", "from": "zeeguu_api", "title": "59", "to": "zeeguu_core.model", "width": 4.07753744390572}, {"arrowStrikethrough": false, "arrows": "to", "from": "zeeguu_api", "title": "88", "to": "zeeguu_core", "width": 4.477336814478207}, {"arrowStrikethrough": false, "arrows": "to", "from": "zeeguu_api_test", "title": "9", "to": "zeeguu_api", "width": 2.1972245773362196}, {"arrowStrikethrough": false, "arrows": "to", "from": "zeeguu_api_test", "title": "5", "to": "zeeguu_core_test", "width": 1.6094379124341003}, {"arrowStrikethrough": false, "arrows": "to", "from": "zeeguu_api_test", "title": "5", "to": "zeeguu_core.model", "width": 1.6094379124341003}, {"arrowStrikethrough": false, "arrows": "to", "from": "zeeguu_api_test", "title": "11", "to": "zeeguu_core", "width": 2.3978952727983707}, {"arrowStrikethrough": false, "arrows": "to", "from": "zeeguu_core_test", "title": "59", "to": "zeeguu_core.model", "width": 4.07753744390572}, {"arrowStrikethrough": false, "arrows": "to", "from": "zeeguu_core_test", "title": "93", "to": "zeeguu_core", "width": 4.532599493153256}, {"arrowStrikethrough": false, "arrows": "to", "from": "zeeguu_core.model", "title": "188", "to": "zeeguu_core", "width": 5.236441962829949}, {"arrowStrikethrough": false, "arrows": "to", "from": "zeeguu_core", "title": "1", "to": "zeeguu_api", "width": 0.0}, {"arrowStrikethrough": false, "arrows": "to", "from": "zeeguu_core", "title": "78", "to": "zeeguu_core.model", "width": 4.356708826689592}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 1,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -2000,
+            "springConstant": 0.04,
+            "springLength": 400
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
